@@ -1,4 +1,4 @@
-##Project : Linux-Server-Configuration
+## Project : Linux-Server-Configuration
 This is a project for Udacity's [Full Stack Web Developer Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004)
 
 # Project Summary
@@ -86,7 +86,7 @@ It allows you to install new packages when needed
 - Change inbound rules in Amazon EC2 --> Type : Custom TCP Rule as 2200
 -To check port 2200 weather working or not by using `ssh -i Catalogkey.pem -p 2200 ubuntu@54.212.41.249`
 
-# Configure the Uncomplicated Firewall (UFW)
+## Configure the Uncomplicated Firewall (UFW)
 * Configure the default firewall for Ubuntu to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123).
 
 sudo ufw status                  # The UFW should be inactive.
@@ -106,6 +106,7 @@ Firewall is active and enabled on system startup
 * Check the status of UFW to list current roles:
     `sudo ufw status` 
 The output should be like this:
+
 Status: active
 
 To                         Action      From
