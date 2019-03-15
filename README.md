@@ -33,14 +33,14 @@ Amazon EC2 provides somewhat more feature-rich and usable interface to set up, c
 
 ### I created an Ubuntu Server on EC2 using the following steps:
 1. Login/signup to https://console.aws.amazon.com/ and login to default user (ubuntu)
-2. On the EC2 Dashboard, access the Instances menu and click on the Instances option. 
-3. On the EC2 Instance screen, click on the Launch Instance button.
-4. On the list presented, locate and select the Ubuntu Server(64-bit Arm).
-5. And then click on the Review and Launch button.
-6. On the summary screen, click on the Launch button.
-7. Select the Key pair authorized to connect to the new virtual machine and click on the Launch Instances.
+2. On the EC2 Dashboard, access the Instances menu and click on the `Instances` option. 
+3. On the EC2 Instance screen, click on the `Launch Instance` button.
+4. On the list presented, locate and `select` the Ubuntu Server(64-bit Arm).
+5. And then click on the `Review and Launch button`.
+6. On the summary screen, click on the `Launch button`.
+7. Select the `Key pair` authorized to connect to the new virtual machine and click on the `Launch Instances`.
 8. Download the newly created Key Pair(`.pem` file)
-9. On the EC2 Dashboard, access the Instances menu and click on the Instances option.As you can see a virtual machine was created.
+9. On the EC2 Dashboard, access the Instances menu and click on the `Instances` option.As you can see a virtual machine was created.
 
  SERVER DETAILS
 * IPv4 Public IP: `54.212.41.249`
