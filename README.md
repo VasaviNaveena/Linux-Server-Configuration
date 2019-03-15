@@ -194,7 +194,7 @@ To                         Action      From
 * Change the ownership of the catalog directory to grader using: `sudo chown -R grader:grader catalog/`
 * Change to the `/var/www/catalog/catalog` directory.
 * Rename the `catalog.py` file to` __init__.py` using: `mv catalog.py __init__.py`
-* change the sqlite to postgresql create_engine in` __init__.py`,`database_setup.py` and `populated_db.py`.
+* change the `sqlite` to `postgresql` create_engine in` __init__.py`,`database_setup.py` and `populated_db.py`.
 * Search for create_engine in and keep it in comments:
 
   `#engine = create_engine("sqlite:///itemcatalog.db")`
