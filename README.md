@@ -222,14 +222,15 @@ To                         Action      From
 * Change the ownership to grader with: `sudo chown -R grader:grader venv3/`
 * Activate the new environment: `. venv3/bin/activate`
 * Installation of dependencies using the following commands:
-    `pip install httplib2`
-    `pip install requests`
-    `pip install --upgrade oauth2client`
-    `pip install sqlalchemy`
-    `pip install flask`
-    `sudo apt-get install libpq-dev`
-    `pip install psycopg2-binary`
-
+```
+    pip install httplib2
+    pip install requests
+    pip install --upgrade oauth2client
+    pip install sqlalchemy
+    pip install flask
+    sudo apt-get install libpq-dev
+    pip install psycopg2-binary
+```
 
 ## Configure and Enable a Virtual Host
 *Creating the configuration file as: `sudo vi /etc/apache2/sites-available/catalog.conf` Add the following code to it:
