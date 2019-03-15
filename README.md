@@ -31,7 +31,7 @@ This project requires to create and set up linux server (e.g. Ubuntu) using the 
 ## Ubuntu Server as Amazon EC2 instance
 Amazon EC2 provides somewhat more feature-rich and usable interface to set up, configure and run virtual machine or servers.
 
-**I created an Ubuntu Server on EC2 using the following steps:
+### I created an Ubuntu Server on EC2 using the following steps:
 1. Login/signup to https://console.aws.amazon.com/ and login to default user (ubuntu)
 2. On the EC2 Dashboard, access the Instances menu and click on the Instances option. 
 3. On the EC2 Instance screen, click on the Launch Instance button.
@@ -49,7 +49,7 @@ Amazon EC2 provides somewhat more feature-rich and usable interface to set up, c
 
 * Application's URL: http://ec2-54-212-41-249.us-west-2.compute.amazonaws.com
 
-. Accessible SSH Port: 2200
+* Accessible SSH Port: 2200
 
 10. In launch-wizard-18 go to inbound and add the following:
 ```
@@ -140,11 +140,11 @@ To                         Action      From
     ```
 - Save and exit using CTRL+X and confirm with Y.
 
-- Verify that grader has sudo permissions. Run su - grader, enter the password.
+- Verify that grader has sudo permissions. Run `su - grader`, enter the password.
 
 ## Create an SSH key pair for grader
-* Configure key-based authentication for grader user
 
+### Configure key-based authentication for grader user
 - create .ssh folder by mkdir /home/grader/.ssh
 - Run this command cp /home/ubuntu/.ssh/authorized_keys /home/grader/.ssh/authorized_keys
 - change ownership `chown grader.grader /home/grader/.ssh`
@@ -164,7 +164,7 @@ To                         Action      From
 * Install Apache  `sudo apt-get install apache2`
 * Enter public IP of the Amazon EC2 instance into browser to Check Apache is working or not by executing public IP.
 * My project is built with Python 3. So, I need to install the Python3 mod_wsgi package:
-            `sudo apt-get install libapache2-mod-wsgi-py3`
+            	`sudo apt-get install libapache2-mod-wsgi-py3`
 * Enabled mod_wsgi with `sudo a2enmod wsgi`
 
 ## Install and configure PostgreSQL
@@ -199,7 +199,7 @@ To                         Action      From
  'engine = create_engine('postgresql://catalog:catalog@localhost/itemcatalog')'
 
 ## Authenticate login through Google
-- In Google Developer's consoloe go to Google Cloud Platform'https://console.cloud.google.com/'.
+- In Google Developer's consoloe go to Google Cloud Platform'https://console.cloud.google.com/`.
 - Click APIs & services on left menu.
 - Click Credentials.
 - Set the authorized JavaScript origins of the project to the IPv4 & Default DNS:
@@ -227,7 +227,7 @@ To                         Action      From
 
 
 ## Configure and Enable a Virtual Host
--->Creating the configuration file as: `sudo vi /etc/apache2/sites-available/catalog.conf` Add the following code to it:
+*Creating the configuration file as: `sudo vi /etc/apache2/sites-available/catalog.conf` Add the following code to it:
 
 	<VirtualHost *:80>
     ServerName 54.212.41.249.xip.io
@@ -249,10 +249,10 @@ To                         Action      From
     LogLevel warn
     CustomLog ${APACHE_LOG_DIR}/access.log combined
     </VirtualHost>
--->Run the following commands in order:
-* To Disable default Virtual Host: `sudo a2dissite 000-default.conf`
-* To Enable Virtual Host : `sudo a2ensite catalog.conf`
-* To Reload Apache: `sudo service apache2 reload`
+*Run the following commands in order:
+- To Disable default Virtual Host: `sudo a2dissite 000-default.conf`
+- To Enable Virtual Host : `sudo a2ensite catalog.conf`
+- To Reload Apache: `sudo service apache2 reload`
 
 ## Set up the Flask application & Adding wsgi file to the project
 * Create /var/www/catalog/catalog.wsgi file add the following lines:
