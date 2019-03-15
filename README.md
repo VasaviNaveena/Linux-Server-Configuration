@@ -104,7 +104,7 @@ The output should be like this:
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
 Firewall is active and enabled on system startup
 ```
-* Check the status of UFW to list current roles:
+* Check the status of `UFW` to list current roles:
     `sudo ufw status` 
 The output should be like this:
 ```
@@ -126,7 +126,7 @@ To                         Action      From
 - While logged in as ubuntu, add user: 
         `sudo adduser grader`
 - Enter a password (twice) and fill out information for this new user.
-* Give grader the permission to sudo
+* Give `grader` the permission to `sudo`.
 - Edits the sudoers file: `sudo visudo`.
 
 - Search for the line that looks like this:
@@ -163,7 +163,7 @@ To                         Action      From
 ## Install and configure Apache to serve a Python mod_wsgi application(while logged in as grader)
 * Install Apache  `sudo apt-get install apache2`
 * Enter public IP of the Amazon EC2 instance into browser to Check Apache is working or not by executing public IP.
-* My project is built with Python 3. So, I need to install the Python3 mod_wsgi package:
+* My project is built with `Python 3`. So, I need to install the `Python3 mod_wsgi` package:
 
             	`sudo apt-get install libapache2-mod-wsgi-py3`
 		
@@ -192,7 +192,7 @@ To                         Action      From
 * Create application directory  `sudo mkdir catalog`
 * Move files in to catalog directory using: `mv !(catalog) catalog`
 * Change the ownership of the catalog directory to grader using: `sudo chown -R grader:grader catalog/`
-* Change to the /var/www/catalog/catalog directory.
+* Change to the `/var/www/catalog/catalog` directory.
 * Rename the `catalog.py` file to` __init__.py` using: `mv catalog.py __init__.py`
 * change the sqlite to postgresql create_engine in` __init__.py`,`database_setup.py` and `populated_db.py`.
 * Search for create_engine in and keep it in comments:
@@ -261,7 +261,7 @@ To                         Action      From
 - To Reload Apache: `sudo service apache2 reload`
 
 ## Set up the Flask application & Adding wsgi file to the project
-* Create /var/www/catalog/catalog.wsgi file add the following lines:
+* Create `/var/www/catalog/catalog.wsgi` file add the following lines:
 ```
   import sys
   import logging
@@ -286,5 +286,5 @@ To                         Action      From
 * To get log messages from Apache server: `sudo tail /var/log/apache2/error.log`
 * To restart Apache: `sudo service apache2 restart`
 
-Special Thanks to Anumsh for a very helpful README in Linux-Server-Configuration Project-Udacity.
+Special Thanks to Anumsh for a very helpful README in `Linux-Server-Configuration` Project-Udacity.
 
