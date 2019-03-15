@@ -1,13 +1,13 @@
-## Project : Linux-Server-Configuration
+# Project : Linux-Server-Configuration
 This is a project for Udacity's [Full Stack Web Developer Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004)
 
-# Project Summary
+## Project Summary
 * Creation and installation of a linux server in the cloud environment.
 * Setting up of this server to host a web application.
 * Installation and configuration of a database server to serve the web application.
 * Deployment of the web application.
 
-# Introduction
+## Introduction
 This project requires to create and set up linux server (e.g. Ubuntu) using the cloud services (Amazon AWS). The server should be then configured to host a web application while ensuring security, availability and accessibility of the server and the app. 
 
 * The server should be initialized and available through a cloud environment.
@@ -28,7 +28,7 @@ This project requires to create and set up linux server (e.g. Ubuntu) using the 
 
 * The server should be set up to serve the  'catalog' Project as wsgi application.*
 
-# Ubuntu Server as Amazon EC2 instance
+## Ubuntu Server as Amazon EC2 instance
 Amazon EC2 provides somewhat more feature-rich and usable interface to set up, configure and run virtual machine or servers.
 
 **I created an Ubuntu Server on EC2 using the following steps:
@@ -52,13 +52,13 @@ Amazon EC2 provides somewhat more feature-rich and usable interface to set up, c
 . Accessible SSH Port: 2200
 
 10. In launch-wizard-18 go to inbound and add the following:
-
+```
 Application      Protocol      Port range
 SSH              TCP           22
 HTTP             TCP           80
 Custom           UDP           123
 Custom           TCP           2200
-
+```
 # Linux Server Configuration:
 
 ## connecting to server via SSH
@@ -88,7 +88,7 @@ It allows you to install new packages when needed
 
 ## Configure the Uncomplicated Firewall (UFW)
 * Configure the default firewall for Ubuntu to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123).
-
+```
 sudo ufw status                  # The UFW should be inactive.
 sudo ufw default deny incoming   # Deny any incoming traffic.
 sudo ufw default allow outgoing  # Enable outgoing traffic.
@@ -96,17 +96,18 @@ sudo ufw allow 2200/tcp          # Allow incoming tcp packets on port 2200.
 sudo ufw allow www               # Allow HTTP traffic in.
 sudo ufw allow 123/udp           # Allow incoming udp packets on port 123.
 sudo ufw deny 22                 # Deny tcp and udp packets on port 53.
-
+```
 * Turn UFW on by using following command: 
     `sudo ufw enable` 
 The output should be like this:
+```
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
 Firewall is active and enabled on system startup
-
+```
 * Check the status of UFW to list current roles:
     `sudo ufw status` 
 The output should be like this:
-
+```
 Status: active
 
 To                         Action      From
@@ -119,7 +120,7 @@ To                         Action      From
 80/tcp (v6)                ALLOW       Anywhere (v6)             
 123/udp (v6)               ALLOW       Anywhere (v6)             
 22 (v6)                    DENY        Anywhere (v6)
-
+```
 ## Create user grader
 * Create a new user account named grader
 - While logged in as ubuntu, add user: 
@@ -129,12 +130,14 @@ To                         Action      From
 - Edits the sudoers file: sudo visudo.
 
 - Search for the line that looks like this:
-
+```
     root    ALL=(ALL:ALL) ALL
+    ```
 - Below this line, add a new line to give sudo privileges to grader user.
-
+```
     root    ALL=(ALL:ALL) ALL
     grader  ALL=(ALL:ALL) ALL
+    ```
 - Save and exit using CTRL+X and confirm with Y.
 
 - Verify that grader has sudo permissions. Run su - grader, enter the password.
@@ -142,14 +145,14 @@ To                         Action      From
 ## Create an SSH key pair for grader
 * Configure key-based authentication for grader user
 
-. create .ssh folder by mkdir /home/grader/.ssh
-. Run this command cp /home/ubuntu/.ssh/authorized_keys /home/grader/.ssh/authorized_keys
-. change ownership `chown grader.grader /home/grader/.ssh`
-. add 'grader' to sudo group `usermod -a G sudo grader`
-. change permissions for .ssh folder `chmod 0700 /home/grader/.ssh/`, for authorized_keys: `chmod 644 authorized_keys`
-. Check in vi /etc/ssh/sshd_config file if PermitRootLogin is set to no
-. Restart SSH: `sudo service ssh restart`
-. On the local machine, cheking if the grader account working or not by running this command :
+- create .ssh folder by mkdir /home/grader/.ssh
+- Run this command cp /home/ubuntu/.ssh/authorized_keys /home/grader/.ssh/authorized_keys
+- change ownership `chown grader.grader /home/grader/.ssh`
+- add 'grader' to sudo group `usermod -a G sudo grader`
+- change permissions for .ssh folder `chmod 0700 /home/grader/.ssh/`, for authorized_keys: `chmod 644 authorized_keys`
+- Check in vi /etc/ssh/sshd_config file if PermitRootLogin is set to no
+- Restart SSH: `sudo service ssh restart`
+- On the local machine, cheking if the grader account working or not by running this command :
 
             `ssh -i Catalogkey.pem -p 2200 grader@54.212.41.249`
 
@@ -165,19 +168,19 @@ To                         Action      From
 * Enabled mod_wsgi with `sudo a2enmod wsgi`
 
 ## Install and configure PostgreSQL
-* sudo apt-get install libpq-dev python-dev
-* sudo apt-get install postgresql postgresql-contrib
-* sudo su - postgres
-* psql
-* CREATE USER catalog WITH PASSWORD 'catalog';
-* ALTER USER catalog CREATEDB;
-* CREATE DATABASE itemcatalog WITH OWNER catalog;
-* \c itemcatalog
-* REVOKE ALL ON SCHEMA public FROM public;
-* GRANT ALL ON SCHEMA public TO catalog;
-* \q
-* exit
-* Switch back to the grader user: exit.
+* `sudo apt-get install libpq-dev python-dev`
+* `sudo apt-get install postgresql postgresql-contrib`
+* `sudo su - postgres`
+* `psql`
+* `CREATE USER catalog WITH PASSWORD 'catalog';`
+* `ALTER USER catalog CREATEDB;`
+* `CREATE DATABASE itemcatalog WITH OWNER catalog;`
+* `\c itemcatalog`
+* `REVOKE ALL ON SCHEMA public FROM public;`
+* `GRANT ALL ON SCHEMA public TO catalog;`
+* `\q`
+* `exit`
+* Switch back to the `grader` user: `exit`
 
 ## Install git, clone and setup project(while logged in as grader)
 * Install Git using: `sudo apt-get install git`
