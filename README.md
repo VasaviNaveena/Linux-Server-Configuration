@@ -18,15 +18,15 @@ This project requires to create and set up linux server (e.g. Ubuntu) using the 
 
 * The server should let the user `grader` to log in to the server remotely through SSH using a public-private key pair authentication.
 
-* The server should not allow remote logins for the root user.
+* The server should not allow remote logins for the `root` user.
 
-* The server should allow the incoming network traffic only for SSH on port 2200, HTTP on port 80, and NTP on port 123.
+* The server should allow the incoming network traffic only for `SSH on port 2200`,` HTTP on port 80`, and `NTP on port 123`.
 
 * The server should have all the packages up-to-date.
 
 * The server should have a database server set up and running for the web application.
 
-* The server should be set up to serve the  'catalog' Project as wsgi application.*
+* The server should be set up to serve the  `catalog` Project as wsgi application.*
 
 ## Ubuntu Server as Amazon EC2 instance
 Amazon EC2 provides somewhat more feature-rich and usable interface to set up, configure and run virtual machine or servers.
@@ -39,17 +39,17 @@ Amazon EC2 provides somewhat more feature-rich and usable interface to set up, c
 5. And then click on the Review and Launch button.
 6. On the summary screen, click on the Launch button.
 7. Select the Key pair authorized to connect to the new virtual machine and click on the Launch Instances.
-8. Download the newly created Key Pair(.pem file)
+8. Download the newly created Key Pair(`.pem` file)
 9. On the EC2 Dashboard, access the Instances menu and click on the Instances option.As you can see a virtual machine was created.
 
  SERVER DETAILS
-* IPv4 Public IP: 54.212.41.249
+* IPv4 Public IP: `54.212.41.249`
 
-* Public DNS (IPv4): ec2-54-212-41-249.us-west-2.compute.amazonaws.com
+* Public DNS (IPv4): `ec2-54-212-41-249.us-west-2.compute.amazonaws.com`
 
 * Application's URL: http://ec2-54-212-41-249.us-west-2.compute.amazonaws.com
 
-* Accessible SSH Port: 2200
+* Accessible SSH Port: `2200`
 
 10. In launch-wizard-18 go to inbound and add the following:
 ```
@@ -83,7 +83,7 @@ It allows you to install new packages when needed
 - Change the port number on line 5 from `22` to `2200`.
 - Save and exit using esc and confirm with `:wq`
 - Restart SSH: `sudo service ssh restart`
-- Change inbound rules in Amazon EC2-Type : Custom TCP Rule as 2200
+- Change inbound rules in Amazon EC2-Type : `Custom TCP Rule` as `2200`
 -To check port 2200 weather working or not by using `ssh -i Catalogkey.pem -p 2200 ubuntu@54.212.41.249`
 
 ## Configure the Uncomplicated Firewall (UFW)
@@ -122,7 +122,7 @@ To                         Action      From
 22 (v6)                    DENY        Anywhere (v6)
 ```
 ## Create user grader
-* Create a new user account named `grader``
+* Create a new user account named `grader`
 - While logged in as ubuntu, add user: 
         `sudo adduser grader`
 - Enter a password (twice) and fill out information for this new user.
@@ -138,7 +138,7 @@ To                         Action      From
     root    ALL=(ALL:ALL) ALL
     grader  ALL=(ALL:ALL) ALL
     ```
-- Save and exit using CTRL+X and confirm with Y.
+- Save and exit using `CTRL+X` and confirm with Y.
 
 - Verify that grader has sudo permissions. Run `su - grader`, enter the password.
 
@@ -158,13 +158,15 @@ To                         Action      From
 
 ## Configure local timezone to UTC(While logged in as grader)
 1. Configure the timezone:  `sudo dpkg-reconfigure tzdata`
-2. It is already set to UTC
+2. It is already set to `UTC`
 
 ## Install and configure Apache to serve a Python mod_wsgi application(while logged in as grader)
 * Install Apache  `sudo apt-get install apache2`
 * Enter public IP of the Amazon EC2 instance into browser to Check Apache is working or not by executing public IP.
 * My project is built with Python 3. So, I need to install the Python3 mod_wsgi package:
+
             	`sudo apt-get install libapache2-mod-wsgi-py3`
+		
 * Enabled mod_wsgi with `sudo a2enmod wsgi`
 
 ## Install and configure PostgreSQL
@@ -184,14 +186,14 @@ To                         Action      From
 
 ## Install git, clone and setup project(while logged in as grader)
 * Install Git using: `sudo apt-get install git`
-* Use cd /var/www to move to the /var/www directory
-* Clone project 'catalog' from github
+* Use `cd /var/www` to move to the `/var/www` directory
+* Clone project `catalog` from github
   `https://github.com/VasaviNaveena/catalog.git` 
 * Create application directory  `sudo mkdir catalog`
 * Move files in to catalog directory using: `mv !(catalog) catalog`
 * Change the ownership of the catalog directory to grader using: `sudo chown -R grader:grader catalog/`
 * Change to the /var/www/catalog/catalog directory.
-* Rename the 'catalog.py' file to` __init__.py` using: `mv catalog.py __init__.py`
+* Rename the `catalog.py` file to` __init__.py` using: `mv catalog.py __init__.py`
 * change the sqlite to postgresql create_engine in` __init__.py`,`database_setup.py` and `populated_db.py`.
 * Search for create_engine in and keep it in comments:
 
@@ -220,13 +222,13 @@ To                         Action      From
 * Change the ownership to grader with: `sudo chown -R grader:grader venv3/`
 * Activate the new environment: `. venv3/bin/activate`
 * Installation of dependencies using the following commands:
-    pip install httplib2
-    pip install requests
-    pip install --upgrade oauth2client
-    pip install sqlalchemy
-    pip install flask
-    sudo apt-get install libpq-dev
-    pip install psycopg2-binary
+    `pip install httplib2`
+    `pip install requests`
+    `pip install --upgrade oauth2client`
+    `pip install sqlalchemy`
+    `pip install flask`
+    `sudo apt-get install libpq-dev`
+    `pip install psycopg2-binary`
 
 
 ## Configure and Enable a Virtual Host
@@ -259,20 +261,20 @@ To                         Action      From
 
 ## Set up the Flask application & Adding wsgi file to the project
 * Create /var/www/catalog/catalog.wsgi file add the following lines:
-
+```
   import sys
   import logging
   logging.basicConfig(stream=sys.stderr)
   sys.path.insert(0, "/var/www/catalog/")
   from catalog import app as application
   application.secret_key = 'supersecretkey'
-
+```
 * Restart Apache: `sudo service apache2 restart`
-* From the /var/www/catalog/catalog/ directory, activate the virtual environment: `. venv3/bin/activate`
-* Run: python database_setup.py.
-* Deactivate the virtual environment: deactivate.
-* Reload Apache: `sudo service apache2 reload`
-* Run: python catalog.wsgi
+* From the `/var/www/catalog/catalog/` directory, activate the virtual environment: `. venv3/bin/activate`
+* Run: `python database_setup.py`.
+* Deactivate the virtual environment: `deactivate`.
+* Reload Apache: `sudo service apache2 reload`.
+* Run: `python catalog.wsgi`.
 
 ## Launch the Web Application
 * Enable the virtual host `sudo a2ensite catalog.conf` 
