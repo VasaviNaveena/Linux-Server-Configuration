@@ -59,15 +59,15 @@ HTTP             TCP           80
 Custom           UDP           123
 Custom           TCP           2200
 
-## Linux Server Configuration:
+# Linux Server Configuration:
 
-# connecting to server via SSH
+## connecting to server via SSH
 * Save the .pem file where your project folder is located.
 * I used the Git bash client and logged in using following command: 
 
        `ssh -i Catalogkey.pem ubuntu@54.212.41.249`
 
-# Updating packages
+## Updating packages
 `sudo apt-get update`
 
 `sudo apt-get upgrade`
@@ -78,7 +78,7 @@ Trying to run these commands wont install packages kept back,then use
 
 It allows you to install new packages when needed 
 
-# Change the SSH port from 22 to 2200
+## Change the SSH port from 22 to 2200
 - Edit the /etc/ssh/sshd_config file: sudo vi /etc/ssh/sshd_config.
 - Change the port number on line 5 from 22 to 2200.
 - Save and exit using esc and confirm with :wq.
@@ -119,7 +119,7 @@ To                         Action      From
 123/udp (v6)               ALLOW       Anywhere (v6)             
 22 (v6)                    DENY        Anywhere (v6)
 
-# Create user grader
+## Create user grader
 * Create a new user account named grader
 - While logged in as ubuntu, add user: 
         `sudo adduser grader`
@@ -138,7 +138,7 @@ To                         Action      From
 
 - Verify that grader has sudo permissions. Run su - grader, enter the password.
 
-# Create an SSH key pair for grader
+## Create an SSH key pair for grader
 * Configure key-based authentication for grader user
 
 . create .ssh folder by mkdir /home/grader/.ssh
@@ -152,18 +152,18 @@ To                         Action      From
 
             `ssh -i Catalogkey.pem -p 2200 grader@54.212.41.249`
 
-# Configure local timezone to UTC(While logged in as grader)
+## Configure local timezone to UTC(While logged in as grader)
 1. Configure the timezone:  `sudo dpkg-reconfigure tzdata`
 2. It is already set to UTC
 
-# Install and configure Apache to serve a Python mod_wsgi application(while logged in as grader)
+## Install and configure Apache to serve a Python mod_wsgi application(while logged in as grader)
 * Install Apache  `sudo apt-get install apache2`
 * Enter public IP of the Amazon EC2 instance into browser to Check Apache is working or not by executing public IP.
 * My project is built with Python 3. So, I need to install the Python3 mod_wsgi package:
             `sudo apt-get install libapache2-mod-wsgi-py3`
 * Enabled mod_wsgi with `sudo a2enmod wsgi`
 
-# Install and configure PostgreSQL
+## Install and configure PostgreSQL
 * sudo apt-get install libpq-dev python-dev
 * sudo apt-get install postgresql postgresql-contrib
 * sudo su - postgres
@@ -178,7 +178,7 @@ To                         Action      From
 * exit
 * Switch back to the grader user: exit.
 
-# Install git, clone and setup project(while logged in as grader)
+## Install git, clone and setup project(while logged in as grader)
 * Install Git using: `sudo apt-get install git`
 * Use cd /var/www to move to the /var/www directory
 * Clone project 'catalog' from github
@@ -194,7 +194,7 @@ To                         Action      From
   And then change the create_engine to the following:
  'engine = create_engine('postgresql://catalog:catalog@localhost/itemcatalog')'
 
-# Authenticate login through Google
+## Authenticate login through Google
 - In Google Developer's consoloe go to Google Cloud Platform'https://console.cloud.google.com/'.
 - Click APIs & services on left menu.
 - Click Credentials.
@@ -205,7 +205,7 @@ To                         Action      From
 - Download the corresponding JSON file credentials, open it and copy the contents.
 - updated the credentials in the project in 'G_client_secret.json' & in '/templates/login.html'
 
-# Installation of virtual environment and dependencies(while logged in as grader)
+## Installation of virtual environment and dependencies(while logged in as grader)
 * Install pip: `sudo apt-get install python-pip`
 * Install the virtual environment: `sudo apt-get install python-virtualenv`
 * Change to the /var/www/catalog/catalog/ directory.
@@ -222,8 +222,8 @@ To                         Action      From
     pip install psycopg2-binary
 
 
-# Configure and Enable a Virtual Host
-Creating the configuration file as: `sudo vi /etc/apache2/sites-available/catalog.conf` Add the following code to it:
+## Configure and Enable a Virtual Host
+-->Creating the configuration file as: `sudo vi /etc/apache2/sites-available/catalog.conf` Add the following code to it:
 
 	<VirtualHost *:80>
     ServerName 54.212.41.249.xip.io
@@ -245,12 +245,12 @@ Creating the configuration file as: `sudo vi /etc/apache2/sites-available/catalo
     LogLevel warn
     CustomLog ${APACHE_LOG_DIR}/access.log combined
     </VirtualHost>
- Run the following commands in order:
+-->Run the following commands in order:
 * To Disable default Virtual Host: `sudo a2dissite 000-default.conf`
 * To Enable Virtual Host : `sudo a2ensite catalog.conf`
 * To Reload Apache: `sudo service apache2 reload`
 
-# Set up the Flask application & Adding wsgi file to the project
+## Set up the Flask application & Adding wsgi file to the project
 * Create /var/www/catalog/catalog.wsgi file add the following lines:
 
   import sys
@@ -267,12 +267,12 @@ Creating the configuration file as: `sudo vi /etc/apache2/sites-available/catalo
 * Reload Apache: `sudo service apache2 reload`
 * Run: python catalog.wsgi
 
-# Launch the Web Application
+## Launch the Web Application
 * Enable the virtual host `sudo a2ensite catalog.conf` 
 * Restart Apache again `sudo service apache2 restart` 
 * open browser to visit site at http://54.212.41.249 or http://ec2-54-212-41-249.us-west-2.compute.amazonaws.com .
 
-# Useful commands
+## Useful commands
 * To get log messages from Apache server: `sudo tail /var/log/apache2/error.log`
 * To restart Apache: `sudo service apache2 restart`
 
