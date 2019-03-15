@@ -11,13 +11,21 @@ This is a project for Udacity's [Full Stack Web Developer Nanodegree](https://ww
 This project requires to create and set up linux server (e.g. Ubuntu) using the cloud services (Amazon AWS). The server should be then configured to host a web application while ensuring security, availability and accessibility of the server and the app. 
 
 . The server should be initialized and available through a cloud environment.
-. The server should be made secure and remotely accessible through SSH - using the public-private key pair 	          authentication feature instead of typical password protection.
+
+. The server should be made secure and remotely accessible through SSH - using the public-private key pair authentication feature instead of typical password protection.
+
 . The server should have an account for the user `grader` with `sudo` privileges.
+
 . The server should let the user `grader` to log in to the server remotely through SSH using a public-private key pair authentication.
+
 . The server should not allow remote logins for the root user.
+
 . The server should allow the incoming network traffic only for SSH on port 2200, HTTP on port 80, and NTP on port 123.
+
 . The server should have all the packages up-to-date.
+
 . The server should have a database server set up and running for the web application.
+
 . The server should be set up to serve the  'catalog' Project as wsgi application.*
 
 ## Ubuntu Server as Amazon EC2 instance
