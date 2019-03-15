@@ -62,7 +62,7 @@ Custom           TCP           2200
 # Linux Server Configuration:
 
 ## connecting to server via SSH
-* Save the .pem file where your project folder is located.
+* Save the `.pem` file where your project folder is located.
 * I used the Git bash client and logged in using following command: 
 
        `ssh -i Catalogkey.pem ubuntu@54.212.41.249`
@@ -79,11 +79,11 @@ Trying to run these commands wont install packages kept back,then use
 It allows you to install new packages when needed 
 
 ## Change the SSH port from 22 to 2200
-- Edit the /etc/ssh/sshd_config file: sudo vi /etc/ssh/sshd_config.
-- Change the port number on line 5 from 22 to 2200.
-- Save and exit using esc and confirm with :wq.
-- Restart SSH: sudo service ssh restart.
-- Change inbound rules in Amazon EC2 --> Type : Custom TCP Rule as 2200
+- Edit the /etc/ssh/sshd_config file: `sudo vi /etc/ssh/sshd_config`.
+- Change the port number on line 5 from `22` to `2200`.
+- Save and exit using esc and confirm with `:wq`
+- Restart SSH: `sudo service ssh restart`
+- Change inbound rules in Amazon EC2-Type : Custom TCP Rule as 2200
 -To check port 2200 weather working or not by using `ssh -i Catalogkey.pem -p 2200 ubuntu@54.212.41.249`
 
 ## Configure the Uncomplicated Firewall (UFW)
@@ -122,12 +122,12 @@ To                         Action      From
 22 (v6)                    DENY        Anywhere (v6)
 ```
 ## Create user grader
-* Create a new user account named grader
+* Create a new user account named `grader``
 - While logged in as ubuntu, add user: 
         `sudo adduser grader`
 - Enter a password (twice) and fill out information for this new user.
 * Give grader the permission to sudo
-- Edits the sudoers file: sudo visudo.
+- Edits the sudoers file: `sudo visudo`.
 
 - Search for the line that looks like this:
 ```
@@ -145,14 +145,14 @@ To                         Action      From
 ## Create an SSH key pair for grader
 
 ### Configure key-based authentication for grader user
-- create .ssh folder by mkdir /home/grader/.ssh
-- Run this command cp /home/ubuntu/.ssh/authorized_keys /home/grader/.ssh/authorized_keys
+- create .ssh folder by `mkdir /home/grader/.ssh`
+- Run this command `cp /home/ubuntu/.ssh/authorized_keys /home/grader/.ssh/authorized_keys`
 - change ownership `chown grader.grader /home/grader/.ssh`
 - add 'grader' to sudo group `usermod -a G sudo grader`
 - change permissions for .ssh folder `chmod 0700 /home/grader/.ssh/`, for authorized_keys: `chmod 644 authorized_keys`
-- Check in vi /etc/ssh/sshd_config file if PermitRootLogin is set to no
+- Check in `vi /etc/ssh/sshd_config` file if PermitRootLogin is set to `no`
 - Restart SSH: `sudo service ssh restart`
-- On the local machine, cheking if the grader account working or not by running this command :
+- On the local machine, cheking if the `grader` account working or not by running this command :
 
             `ssh -i Catalogkey.pem -p 2200 grader@54.212.41.249`
 
@@ -191,23 +191,26 @@ To                         Action      From
 * Move files in to catalog directory using: `mv !(catalog) catalog`
 * Change the ownership of the catalog directory to grader using: `sudo chown -R grader:grader catalog/`
 * Change to the /var/www/catalog/catalog directory.
-* Rename the 'catalog.py' file to __init__.py using: `mv mainpage.py __init__.py`
-* change the sqlite to postgresql create_engine in __init__.py,database_setup.py and populated_db.py.
-* Search for create_engine in and keep it in comments
-  '#engine = create_engine("sqlite:///itemcatalog.db")'
+* Rename the 'catalog.py' file to` __init__.py` using: `mv catalog.py __init__.py`
+* change the sqlite to postgresql create_engine in` __init__.py`,`database_setup.py` and `populated_db.py`.
+* Search for create_engine in and keep it in comments:
+
+  `#engine = create_engine("sqlite:///itemcatalog.db")`
+  
   And then change the create_engine to the following:
- 'engine = create_engine('postgresql://catalog:catalog@localhost/itemcatalog')'
+  
+ `engine = create_engine('postgresql://catalog:catalog@localhost/itemcatalog')`
 
 ## Authenticate login through Google
 - In Google Developer's consoloe go to Google Cloud Platform'https://console.cloud.google.com/`.
-- Click APIs & services on left menu.
-- Click Credentials.
-- Set the authorized JavaScript origins of the project to the IPv4 & Default DNS:
+- Click `APIs & services` on left menu.
+- Click `Credentials`.
+- Set the authorized `JavaScript origins` of the project to the IPv4 & Default DNS:
   http://54.212.41.249.xip.io & http://ec2-54-212-41-249.us-west-2.compute.amazonaws.com
-- Set the redirect_uris to http://54.212.41.249.xip.io/login & http://54.212.41.249.xip.io/gconnect & 
+- Set the `redirect_uris` to http://54.212.41.249.xip.io/login & http://54.212.41.249.xip.io/gconnect & 
   http://54.212.41.249.xip.io/callback
 - Download the corresponding JSON file credentials, open it and copy the contents.
-- updated the credentials in the project in 'G_client_secret.json' & in '/templates/login.html'
+- updated the credentials in the project in `G_client_secret.json` & in `/templates/login.html`
 
 ## Installation of virtual environment and dependencies(while logged in as grader)
 * Install pip: `sudo apt-get install python-pip`
