@@ -10,23 +10,23 @@ This is a project for Udacity's [Full Stack Web Developer Nanodegree](https://ww
 ## Introduction
 This project requires to create and set up linux server (e.g. Ubuntu) using the cloud services (Amazon AWS). The server should be then configured to host a web application while ensuring security, availability and accessibility of the server and the app. 
 
-. The server should be initialized and available through a cloud environment.
+* The server should be initialized and available through a cloud environment.
 
-. The server should be made secure and remotely accessible through SSH - using the public-private key pair authentication feature instead of typical password protection.
+* The server should be made secure and remotely accessible through SSH - using the public-private key pair authentication feature instead of typical password protection.
 
-. The server should have an account for the user `grader` with `sudo` privileges.
+* The server should have an account for the user `grader` with `sudo` privileges.
 
-. The server should let the user `grader` to log in to the server remotely through SSH using a public-private key pair authentication.
+* The server should let the user `grader` to log in to the server remotely through SSH using a public-private key pair authentication.
 
-. The server should not allow remote logins for the root user.
+* The server should not allow remote logins for the root user.
 
-. The server should allow the incoming network traffic only for SSH on port 2200, HTTP on port 80, and NTP on port 123.
+* The server should allow the incoming network traffic only for SSH on port 2200, HTTP on port 80, and NTP on port 123.
 
-. The server should have all the packages up-to-date.
+* The server should have all the packages up-to-date.
 
-. The server should have a database server set up and running for the web application.
+* The server should have a database server set up and running for the web application.
 
-. The server should be set up to serve the  'catalog' Project as wsgi application.*
+* The server should be set up to serve the  'catalog' Project as wsgi application.*
 
 ## Ubuntu Server as Amazon EC2 instance
 Amazon EC2 provides somewhat more feature-rich and usable interface to set up, configure and run virtual machine or servers.
@@ -43,11 +43,11 @@ Amazon EC2 provides somewhat more feature-rich and usable interface to set up, c
 9. On the EC2 Dashboard, access the Instances menu and click on the Instances option.As you can see a virtual machine was created.
 
  SERVER DETAILS
-. IPv4 Public IP: 54.212.41.249
+* IPv4 Public IP: 54.212.41.249
 
-. Public DNS (IPv4): ec2-54-212-41-249.us-west-2.compute.amazonaws.com
+* Public DNS (IPv4): ec2-54-212-41-249.us-west-2.compute.amazonaws.com
 
-. Application's URL: http://ec2-54-212-41-249.us-west-2.compute.amazonaws.com
+* Application's URL: http://ec2-54-212-41-249.us-west-2.compute.amazonaws.com
 
 . Accessible SSH Port: 2200
 
@@ -157,41 +157,41 @@ To                         Action      From
 2. It is already set to UTC
 
 # Install and configure Apache to serve a Python mod_wsgi application(while logged in as grader)
-. Install Apache  `sudo apt-get install apache2`
-. Enter public IP of the Amazon EC2 instance into browser to Check Apache is working or not by executing public IP.
-. My project is built with Python 3. So, I need to install the Python3 mod_wsgi package:
+* Install Apache  `sudo apt-get install apache2`
+* Enter public IP of the Amazon EC2 instance into browser to Check Apache is working or not by executing public IP.
+* My project is built with Python 3. So, I need to install the Python3 mod_wsgi package:
             `sudo apt-get install libapache2-mod-wsgi-py3`
-. Enabled mod_wsgi with `sudo a2enmod wsgi`
+* Enabled mod_wsgi with `sudo a2enmod wsgi`
 
 # Install and configure PostgreSQL
-. sudo apt-get install libpq-dev python-dev
-. sudo apt-get install postgresql postgresql-contrib
-. sudo su - postgres
-. psql
-. CREATE USER catalog WITH PASSWORD 'catalog';
-. ALTER USER catalog CREATEDB;
-. CREATE DATABASE itemcatalog WITH OWNER catalog;
-. \c itemcatalog
-. REVOKE ALL ON SCHEMA public FROM public;
-. GRANT ALL ON SCHEMA public TO catalog;
-. \q
-. exit
-. Switch back to the grader user: exit.
+* sudo apt-get install libpq-dev python-dev
+* sudo apt-get install postgresql postgresql-contrib
+* sudo su - postgres
+* psql
+* CREATE USER catalog WITH PASSWORD 'catalog';
+* ALTER USER catalog CREATEDB;
+* CREATE DATABASE itemcatalog WITH OWNER catalog;
+* \c itemcatalog
+* REVOKE ALL ON SCHEMA public FROM public;
+* GRANT ALL ON SCHEMA public TO catalog;
+* \q
+* exit
+* Switch back to the grader user: exit.
 
 # Install git, clone and setup project(while logged in as grader)
-. Install Git using: `sudo apt-get install git`
-. Use cd /var/www to move to the /var/www directory
-. Clone project 'catalog' from github
+* Install Git using: `sudo apt-get install git`
+* Use cd /var/www to move to the /var/www directory
+* Clone project 'catalog' from github
   `https://github.com/VasaviNaveena/catalog.git` 
-. Create application directory  `sudo mkdir catalog`
-. Move files in to catalog directory using: `mv !(catalog) catalog`
-. Change the ownership of the catalog directory to grader using: `sudo chown -R grader:grader catalog/`
-. Change to the /var/www/catalog/catalog directory.
-. Rename the 'catalog.py' file to __init__.py using: `mv mainpage.py __init__.py`
-. change the sqlite to postgresql create_engine in __init__.py,database_setup.py and populated_db.py.
-. Search for create_engine in and keep it in comments
+* Create application directory  `sudo mkdir catalog`
+* Move files in to catalog directory using: `mv !(catalog) catalog`
+* Change the ownership of the catalog directory to grader using: `sudo chown -R grader:grader catalog/`
+* Change to the /var/www/catalog/catalog directory.
+* Rename the 'catalog.py' file to __init__.py using: `mv mainpage.py __init__.py`
+* change the sqlite to postgresql create_engine in __init__.py,database_setup.py and populated_db.py.
+* Search for create_engine in and keep it in comments
   '#engine = create_engine("sqlite:///itemcatalog.db")'
-  And change the create_engine to the following:
+  And then change the create_engine to the following:
  'engine = create_engine('postgresql://catalog:catalog@localhost/itemcatalog')'
 
 # Authenticate login through Google
@@ -206,13 +206,13 @@ To                         Action      From
 - updated the credentials in the project in 'G_client_secret.json' & in '/templates/login.html'
 
 # Installation of virtual environment and dependencies(while logged in as grader)
-. Install pip: `sudo apt-get install python-pip`
-. Install the virtual environment: `sudo apt-get install python-virtualenv`
-. Change to the /var/www/catalog/catalog/ directory.
-. Create the virtual environment: `sudo virtualenv -p python3 venv3`
-. Change the ownership to grader with: `sudo chown -R grader:grader venv3/`
-. Activate the new environment: `. venv3/bin/activate`
-. Installation of dependencies using the following commands:
+* Install pip: `sudo apt-get install python-pip`
+* Install the virtual environment: `sudo apt-get install python-virtualenv`
+* Change to the /var/www/catalog/catalog/ directory.
+* Create the virtual environment: `sudo virtualenv -p python3 venv3`
+* Change the ownership to grader with: `sudo chown -R grader:grader venv3/`
+* Activate the new environment: `. venv3/bin/activate`
+* Installation of dependencies using the following commands:
     pip install httplib2
     pip install requests
     pip install --upgrade oauth2client
@@ -246,12 +246,12 @@ Creating the configuration file as: `sudo vi /etc/apache2/sites-available/catalo
     CustomLog ${APACHE_LOG_DIR}/access.log combined
     </VirtualHost>
  Run the following commands in order:
-. To Disable default Virtual Host: `sudo a2dissite 000-default.conf`
-. To Enable Virtual Host : `sudo a2ensite catalog.conf`
-. To Reload Apache: `sudo service apache2 reload`
+* To Disable default Virtual Host: `sudo a2dissite 000-default.conf`
+* To Enable Virtual Host : `sudo a2ensite catalog.conf`
+* To Reload Apache: `sudo service apache2 reload`
 
 # Set up the Flask application & Adding wsgi file to the project
-. Create /var/www/catalog/catalog.wsgi file add the following lines:
+* Create /var/www/catalog/catalog.wsgi file add the following lines:
 
   import sys
   import logging
@@ -260,21 +260,21 @@ Creating the configuration file as: `sudo vi /etc/apache2/sites-available/catalo
   from catalog import app as application
   application.secret_key = 'supersecretkey'
 
-. Restart Apache: `sudo service apache2 restart`
-. From the /var/www/catalog/catalog/ directory, activate the virtual environment: `. venv3/bin/activate`
-. Run: python database_setup.py.
-. Deactivate the virtual environment: deactivate.
-. Reload Apache: `sudo service apache2 reload`
-. Run: python catalog.wsgi
+* Restart Apache: `sudo service apache2 restart`
+* From the /var/www/catalog/catalog/ directory, activate the virtual environment: `. venv3/bin/activate`
+* Run: python database_setup.py.
+* Deactivate the virtual environment: deactivate.
+* Reload Apache: `sudo service apache2 reload`
+* Run: python catalog.wsgi
 
 # Launch the Web Application
-. Enable the virtual host `sudo a2ensite catalog.conf` 
-. Restart Apache again `sudo service apache2 restart` 
-. open browser to visit site at http://54.212.41.249 or http://ec2-54-212-41-249.us-west-2.compute.amazonaws.com .
+* Enable the virtual host `sudo a2ensite catalog.conf` 
+* Restart Apache again `sudo service apache2 restart` 
+* open browser to visit site at http://54.212.41.249 or http://ec2-54-212-41-249.us-west-2.compute.amazonaws.com .
 
 # Useful commands
-. To get log messages from Apache server: `sudo tail /var/log/apache2/error.log`
-. To restart Apache: `sudo service apache2 restart`
+* To get log messages from Apache server: `sudo tail /var/log/apache2/error.log`
+* To restart Apache: `sudo service apache2 restart`
 
 Special Thanks to Anumsh for a very helpful README in Linux-Server-Configuration Project-Udacity.
 
