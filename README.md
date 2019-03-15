@@ -1,13 +1,13 @@
-#Project : Linux-Server-Configuration
+##Project : Linux-Server-Configuration
 This is a project for Udacity's [Full Stack Web Developer Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004)
 
-## Project Summary
+# Project Summary
 * Creation and installation of a linux server in the cloud environment.
 * Setting up of this server to host a web application.
 * Installation and configuration of a database server to serve the web application.
 * Deployment of the web application.
 
-## Introduction
+# Introduction
 This project requires to create and set up linux server (e.g. Ubuntu) using the cloud services (Amazon AWS). The server should be then configured to host a web application while ensuring security, availability and accessibility of the server and the app. 
 
 * The server should be initialized and available through a cloud environment.
@@ -28,10 +28,10 @@ This project requires to create and set up linux server (e.g. Ubuntu) using the 
 
 * The server should be set up to serve the  'catalog' Project as wsgi application.*
 
-## Ubuntu Server as Amazon EC2 instance
+# Ubuntu Server as Amazon EC2 instance
 Amazon EC2 provides somewhat more feature-rich and usable interface to set up, configure and run virtual machine or servers.
 
-# I created an Ubuntu Server on EC2 using the following steps:
+**I created an Ubuntu Server on EC2 using the following steps:
 1. Login/signup to https://console.aws.amazon.com/ and login to default user (ubuntu)
 2. On the EC2 Dashboard, access the Instances menu and click on the Instances option. 
 3. On the EC2 Instance screen, click on the Launch Instance button.
