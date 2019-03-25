@@ -205,7 +205,7 @@ To                         Action      From
  `engine = create_engine('postgresql://catalog:catalog@localhost/itemcatalog')`
 
 ## Authenticate login through Google
-- In Google Developer's consoloe go to Google Cloud Platform'https://console.cloud.google.com/`.
+- In Google Developer's consoloe go to Google Cloud Platform`https://console.cloud.google.com/`.
 - Click `APIs & services` on left menu.
 - Click `Credentials`.
 - Set the authorized `JavaScript origins` of the project to the IPv4 & Default DNS:
