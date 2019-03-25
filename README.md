@@ -8,7 +8,7 @@ This is a project for Udacity's [Full Stack Web Developer Nanodegree](https://ww
 * Deployment of the web application.
 
 ## Introduction
-This project requires to create and set up linux server (e.g. Ubuntu) using the cloud services (Amazon AWS). The server should be then configured to host a web application while ensuring security, availability and accessibility of the server and the app. 
+This project requires to create and set up linux server (e.g. Ubuntu) using the cloud services (**Amazon AWS**). The server should be then configured to host a web application while ensuring security, availability and accessibility of the server and the app. 
 
 * The server should be initialized and available through a cloud environment.
 
@@ -32,7 +32,7 @@ This project requires to create and set up linux server (e.g. Ubuntu) using the 
 Amazon EC2 provides somewhat more feature-rich and usable interface to set up, configure and run virtual machine or servers.
 
 ### I created an Ubuntu Server on EC2 using the following steps:
-1. Login/signup to https://console.aws.amazon.com/ and login to default user (ubuntu)
+1. Login/signup to [https://console.aws.amazon.com/] and login to default user (ubuntu)
 2. On the EC2 Dashboard, access the Instances menu and click on the `Instances` option. 
 3. On the EC2 Instance screen, click on the `Launch Instance` button.
 4. On the list presented, locate and `select` the Ubuntu Server(64-bit Arm).
@@ -42,7 +42,8 @@ Amazon EC2 provides somewhat more feature-rich and usable interface to set up, c
 8. Download the newly created Key Pair(`.pem` file)
 9. On the EC2 Dashboard, access the Instances menu and click on the `Instances` option.As you can see a virtual machine was created.
 
- SERVER DETAILS
+ **SERVER DETAILS
+ 
 * IPv4 Public IP: `54.212.41.249`
 
 * Public DNS (IPv4): `ec2-54-212-41-249.us-west-2.compute.amazonaws.com`
@@ -87,7 +88,7 @@ It allows you to install new packages when needed
 -To check port 2200 weather working or not by using `ssh -i Catalogkey.pem -p 2200 ubuntu@54.212.41.249`
 
 ## Configure the Uncomplicated Firewall (UFW)
-* Configure the default firewall for Ubuntu to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123).
+* Configure the default firewall for Ubuntu to only allow incoming connections for `SSH (port 2200)`, `HTTP (port 80)`, and `NTP (port 123)`.
 ```
 sudo ufw status                  # The UFW should be inactive.
 sudo ufw default deny incoming   # Deny any incoming traffic.
